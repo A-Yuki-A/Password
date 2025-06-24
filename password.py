@@ -4,10 +4,11 @@ import time
 import itertools
 
 # 使える文字（英大小文字 + 数字 + 記号）
-available_chars = string.ascii_letters + string.digits + string.punctuation
+custom_symbols = "!#$%&()/<=>?@"  # 制限された記号
+available_chars = string.ascii_letters + string.digits + custom_symbols
 
 # 利用可能な記号一覧を表示用に取得
-symbols_list = string.punctuation
+symbols_list = custom_symbols
 
 
 def simulate_brute_force(target_password):
@@ -54,7 +55,7 @@ st.write(f"""
 - 英小文字: a–z
 - 数字: 0–9
 - 記号: {symbols_list}  
-※記号は上記に含まれる全てを利用可能です。
+※記号は上記のもののみ利用可能です。
 """ )
 
 # パスワード入力 (1～15文字)
