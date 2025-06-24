@@ -5,6 +5,10 @@ import time
 # 使える文字（英大小文字 + 数字 + 記号）
 available_chars = string.ascii_letters + string.digits + string.punctuation
 
+# 利用可能な記号一覧を表示用に取得
+symbols_list = string.punctuation
+
+
 def simulate_brute_force(password):
     start_time = time.time()
     attempts = 0
@@ -34,20 +38,34 @@ def simulate_brute_force(password):
 
     return attempts, round(elapsed_time, 4), danger
 
-st.title("Crack Me If You Can - Brute Force Simulator")
+# タイトルを短くクールに設定
+st.title("Brute Blitz")
+
+# ツール説明と使用可能文字の案内
 st.write("""
 このツールでは、入力されたパスワードに対して、
 ブルートフォース攻撃（総当たり）による解読を模擬体験できます。
-""")
 
-password = st.text_input("パスワードを入力してください（1〜10文字、英数字・記号OK）", type="password")
+**使える文字:**
+- 英大文字: A–Z
+- 英小文字: a–z
+- 数字: 0–9
+- 記号: {}  
+※記号は上記に含まれる全てを利用可能です。
+""".format(symbols_list))
+
+# パスワード入力 (1～15文字)
+password = st.text_input(
+    "パスワードを入力してください（1〜15文字、英数字・記号OK）",
+    type="password"
+)
 run_attack = st.button("解析")
 
 if run_attack:
     if not password:
         st.warning("パスワードを入力してください。")
-    elif len(password) > 10:
-        st.error("パスワードは10文字以内にしてください。")
+    elif len(password) > 15:
+        st.error("パスワードは15文字以内にしてください。")
     else:
         with st.spinner("解析中..."):
             attempts, elapsed, danger = simulate_brute_force(password)
