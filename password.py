@@ -34,16 +34,19 @@ def simulate_brute_force(password):
 
     return attempts, round(elapsed_time, 4), danger
 
-st.title("ブルートフォース攻撃シミュレーター")
+st.title("Crack Me If You Can - Brute Force Simulator")
 st.write("""
 このツールでは、入力されたパスワードに対して、
 ブルートフォース攻撃（総当たり）による解読を模擬体験できます。
 """)
 
 password = st.text_input("パスワードを入力してください（1〜10文字、英数字・記号OK）", type="password")
+run_attack = st.button("解析")
 
-if password:
-    if len(password) > 10:
+if run_attack:
+    if not password:
+        st.warning("パスワードを入力してください。")
+    elif len(password) > 10:
         st.error("パスワードは10文字以内にしてください。")
     else:
         with st.spinner("解析中..."):
