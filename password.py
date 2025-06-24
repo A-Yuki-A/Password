@@ -4,11 +4,9 @@ import time
 import itertools
 
 # 使える文字（英大小文字 + 数字 + 記号）
-custom_symbols = "!#$%&()/<=>?@"  # 制限された記号
+custom_symbols = "!#$%&@"  # 制限された記号
+symbols_list = ' '.join(custom_symbols)  # 表示用: ! # $ % & @
 available_chars = string.ascii_letters + string.digits + custom_symbols
-
-# 利用可能な記号一覧を表示用に取得
-symbols_list = custom_symbols
 
 
 def simulate_brute_force(target_password):
@@ -58,9 +56,9 @@ st.write(f"""
 ※記号は上記のもののみ利用可能です。
 """ )
 
-# パスワード入力 (1～15文字)
+# パスワード入力 (1～8文字)
 password = st.text_input(
-    "パスワードを入力してください（1〜15文字、英数字・記号OK）",
+    "パスワードを入力してください（1〜8文字、英数字・記号OK）",
     type="password"
 )
 run_attack = st.button("解析")
@@ -68,8 +66,8 @@ run_attack = st.button("解析")
 if run_attack:
     if not password:
         st.warning("パスワードを入力してください。")
-    elif len(password) > 15:
-        st.error("パスワードは15文字以内にしてください。")
+    elif len(password) > 8:
+        st.error("パスワードは8文字以内にしてください。")
     else:
         with st.spinner("解析中..."):
             attempts, elapsed, danger = simulate_brute_force(password)
